@@ -42,20 +42,20 @@ export default function useUser(): UserReturn {
         setUsers(prev => prev.filter(u => u.id !== id))
     }
 
-//   return (
-//     <Container>
-//         {loading && <Spinner animation="border" />}
-//         {error && <Alert variant='danger'>{error}</Alert>}
-//         <ListGroup>
-//             {users.map(ele => <ListGroup.Item>
-//                 {ele.name} 
-//                 <Button variant="dark" onClick={() => removeUser(ele.id)}>X</Button>
-//             </ListGroup.Item>)}
-//         </ListGroup> 
-//     </Container>
-//   )
+  return (
+    <Container>
+        {loading && <Spinner animation="border" />}
+        {error && <Alert variant='danger'>{error}</Alert>}
+        <ListGroup>
+            {users.map(ele => <ListGroup.Item>
+                {ele.name} 
+                <Button variant="dark" onClick={() => removeUser(ele.id)}>X</Button>
+            </ListGroup.Item>)}
+        </ListGroup> 
+    </Container>
+  )
 
-    return {users, loading, error, removeUser}
+    // return {users, loading, error, removeUser}
 }
 
 // Utilizzo del componente ExampleUserComponent 

@@ -26,7 +26,7 @@ function App() {
   return (
     <>
       {/* <UserComponentProps name="Mario Rossi" email="m.rossi@example.com" role='admin' onDelete={(id) => console.log(id)} /> */}
-    <ExampleUserComponent />
+    {/* <ExampleUserComponent /> */}
     </>
   )
 }

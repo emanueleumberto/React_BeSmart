@@ -18,7 +18,7 @@ type UserReturn = {
 
 
 
-export default function useUser(): UserReturn {
+export default function useUser(): UserReturn{
 
     const [users, setUsers] = useState<User[]>([])
     const [loading, setLoading] = useState(true)
@@ -30,7 +30,7 @@ export default function useUser(): UserReturn {
         .then((data: User[]) => {
             setTimeout(()=>{
                 setUsers(data)
-            setLoading(false)
+                setLoading(false)
             }, 2000)
         })
         .catch((error: Error) => {
@@ -44,17 +44,17 @@ export default function useUser(): UserReturn {
         setUsers(prev => prev.filter(ele => ele.id !== id))
     }
 
-    // return (
-    // <Container>
-    //     {loading && <Spinner animation="border" />}
-    //     {error && <Alert variant='danger'>{error}</Alert>}
-    //     <ListGroup>
-    //         {users.map(ele => <ListGroup.Item>
-    //             {ele.name} 
-    //             <Button variant="dark" onClick={() => removeUser(ele.id)}>X</Button>
-    //         </ListGroup.Item>)}
-    //     </ListGroup> 
-    // </Container>
+//     return (
+//     <Container>
+//         {loading && <Spinner animation="border" />}
+//         {error && <Alert variant='danger'>{error}</Alert>}
+//         <ListGroup>
+//             {users.map(ele => <ListGroup.Item>
+//                 {ele.name} 
+//                 <Button variant="dark" onClick={() => removeUser(ele.id)}>X</Button>
+//             </ListGroup.Item>)}
+//         </ListGroup> 
+//     </Container>
 //   )
 return {users, loading, error, removeUser}
 }
