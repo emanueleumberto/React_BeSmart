@@ -62,17 +62,43 @@ export default function UseMemoComponent() {
             const passaDisponibile = !soloDisponibili || p.disponibile; // Visualizza tutti o solo disponibili
             return passaCategoria && passaDisponibile;
         })
-
     }, [categoria, soloDisponibili])
     // ↑ deps: [categoria, soloDisponibili]
     // React confronta questi valori con quelli del render precedente.
     // Se sono identici (===), restituisce il risultato cached.
 
+    // Dipende da 'prodottiFiltrati' e 'ordinamento'.
+    // La catena è: categoria/soloDisponibili → prodottiFiltrati → prodottiOrdinati.
+    // Se il filtro non cambia, l'ordinamento non viene ricalcolato nemmeno lui.
+    //
+    // IMPORTANTE: [...prodottiFiltrati] crea una copia prima di ordinare.
+    // Array.sort() muta l'array originale: ordinare direttamente prodottiFiltrati
+    // modificherebbe il valore memoizzato, causando bug difficili da tracciare.
+    const prodottiOrdinati = useMemo(() => {
+        console.log("Ordinamento ricalcolato");
+        return [...prodottiFiltrati].sort((a, b) => {
+            switch(ordinamento) {
+                case "prezzo-asc": return a.prezzo - b.prezzo
+                case "prezzo-desc": return b.prezzo - a.prezzo
+                case "nome-asc": return a.nome.localeCompare(b.nome)
+                case "nome-desc": return b.nome.localeCompare(a.nome)
+            }
+        })
+    }, [ordinamento, prodottiFiltrati])
+    // ↑ deps: [prodottiFiltrati, ordinamento]
+    // 'prodottiFiltrati' è un array memoizzato: il suo riferimento cambia
+    // solo quando il filtro viene effettivamente ricalcolato.
+    // Questo è il motivo per cui useMemo è utile anche come dipendenza.
+
   return (
     <div>
-        <h1>UseMemoComponent</h1>
+        <h1>UseMemoComponent {contatore}</h1>
+        {/* ── Contatore indipendente ──────────────────────────────────────────
+          Ogni click provoca un re-render del componente.
+          NON appariranno i console log, dimostrando che i calcoli sono cached. */}
+        <button onClick={() => setContatore(c => c + 1)}>Contatore</button>
         <ul>
-            {prodottiFiltrati.map(p => <li key={p.id}><strong>{p.nome}</strong> - € {p.prezzo} ({p.categoria}) {p.disponibile ? "Disponibile" : "Non Disponibile"} </li>)}
+            {prodottiOrdinati.map(p => <li key={p.id}><strong>{p.nome}</strong> - € {p.prezzo} ({p.categoria}) {p.disponibile ? "Disponibile" : "Non Disponibile"} </li>)}
         </ul>
     </div>
   )

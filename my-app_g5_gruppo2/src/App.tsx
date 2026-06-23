@@ -1,6 +1,8 @@
 
 import './App.css'
+import UseCallbackComponent from './components/UseCallbackComponent'
 import UseContextComponent from './components/UseContextComponent'
+import UseFormComponent from './components/UseFormComponent'
 import UseMemoComponent from './components/UseMemoComponent'
 import UseReducerComponent from './components/UseReducerComponent'
 import UseRefFormComponent from './components/UseRefFormComponent'
@@ -12,7 +14,9 @@ function App() {
       {/* <UseRefFormComponent /> */}
       {/* <UseContextComponent /> */}
       {/* <UseReducerComponent /> */}
-      <UseMemoComponent />
+      {/* <UseMemoComponent /> */}
+      {/* <UseCallbackComponent /> */}
+      <UseFormComponent />
     </>
   )
 }

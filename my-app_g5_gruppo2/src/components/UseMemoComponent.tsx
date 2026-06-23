@@ -42,10 +42,9 @@ const prodotti: Prodotto[] = [
     { id: 10, nome: "Caffè Arabica",    categoria: "alimentari",    prezzo: 8,    disponibile: true  }
 ]
 
-
 export default function UseMemoComponent() {
 
-    const [categoria, setCategoria] = useState<Prodotto["categoria"] | "tutto">("abbigliamento");
+    const [categoria, setCategoria] = useState<Prodotto["categoria"] | "tutto">("tutto");
     const [soloDisponibili, setSoloDisponibili] = useState<boolean>(false);
     const [ordinamento, setOrdinamento] = useState<Ordinameto>("prezzo-desc");
 
@@ -93,7 +92,8 @@ export default function UseMemoComponent() {
 
   return (
     <div>
-        <h1>UseMemoComponent</h1>
+        <h1>UseMemoComponent {contatore}</h1>
+        <button onClick={() => setContatore(c => c + 1)} >Contatore</button>
         <ul>
             {prodottiOrdinati.map(p => <li key={p.id}>
                 <strong>{p.nome}</strong> €{p.prezzo} ({p.categoria}) - {p.disponibile ? "Disponibile" : "Non Disponibilie"} </li>)}
