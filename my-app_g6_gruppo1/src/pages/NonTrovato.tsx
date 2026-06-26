@@ -1,5 +1,11 @@
+import NavbarComponent from "../components/NavbarComponent"
+
 export default function NonTrovato() {
   return (
-    <div>NonTrovato</div>
+    <>
+    <NavbarComponent />
+      <div>NonTrovato</div>
+    </>
+    
   )
 }
