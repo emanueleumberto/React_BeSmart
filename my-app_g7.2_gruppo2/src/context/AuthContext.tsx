@@ -1,4 +1,4 @@
-import { createContext, useCallback, useEffect, useReducer, useState, type ReactNode } from "react";
+import { createContext, useCallback, useContext, useEffect, useReducer, useState, type ReactNode } from "react";
 import { dbUser } from "../users";
 
 export interface Utente {
@@ -74,3 +74,9 @@ export function AuthProvider({children}:{children: ReactNode}) {
     )
 }
 
+
+export function useAuth() {
+    const ctx = useContext(AuthContext)
+    if(!ctx) throw new Error('Context non disponibile!!!')
+    return ctx
+}

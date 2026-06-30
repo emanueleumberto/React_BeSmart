@@ -56,6 +56,7 @@ export default function AuthProvider({children}: {children: ReactNode}) {
     }, [])
 
     const login = useCallback(async (email: string, password: string) => {
+        setErrore(null)
         await new Promise(r => setTimeout(r, 1000)) // await apiLogin(email, password)
         
         const record = dbUtenti[email.toLowerCase()]
